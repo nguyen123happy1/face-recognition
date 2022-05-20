@@ -31,9 +31,10 @@ def generate_frames():
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-@app.route('/')
-def index():
-    return render_template('index.html', token='flask-react')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html", token="flask-react")
 
 @app.route('/video')
 def video():
